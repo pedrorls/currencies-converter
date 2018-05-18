@@ -12,14 +12,14 @@ export default EStylesheet.create({
     },
     containerImage: {
         width: imageWidth,
-        height: imageHeight,
+        height: imageHeight / 2,
     },
     textLogo:{
         color: '$white',
         fontSize: 26,
         fontWeight: '600',
         letterSpacing: -0.5,
-        marginTop: 2,
-        marginBottom: 10,
+        marginTop: 5,
+        marginBottom: 5,
     }
 });

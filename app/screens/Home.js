@@ -45,8 +45,8 @@ export default class Home extends Component{
                     barStyle="light-content"
                 />
                 <Header onPress={this.configPress} />
+                <Logo/>
                 <KeyboardAvoidingView behavior='padding'>
-                    <Logo/>
                     <InputWithButton
                         buttonText={TEMP_BASE_CURRENCY}
                         onPress={this.onPressBaseCurrency}
