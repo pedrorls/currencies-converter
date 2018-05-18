@@ -20,5 +20,6 @@ export default EStylesheet.create({
         fontWeight: '600',
         letterSpacing: -0.5,
         marginTop: 2,
+        marginBottom: 10,
     }
 });

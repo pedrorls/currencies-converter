@@ -10,6 +10,7 @@ export default EStyleSheet.create({
     },
     icon:{
         width: 20,
+        height: 20,
         marginRight: 11,
     },
     text:{
