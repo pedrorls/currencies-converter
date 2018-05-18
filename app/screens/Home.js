@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
@@ -45,23 +45,24 @@ export default class Home extends Component{
                     barStyle="light-content"
                 />
                 <Header onPress={this.configPress} />
-                <Logo/>
-                <InputWithButton
-                    buttonText={TEMP_BASE_CURRENCY}
-                    onPress={this.onPressBaseCurrency}
-                    defaultValue={TEMP_BASE_PRICE}
-                    keyboardType='numeric'
-                    onChangeText={this.onTextChange}
+                <KeyboardAvoidingView behavior='padding'>
+                    <Logo/>
+                    <InputWithButton
+                        buttonText={TEMP_BASE_CURRENCY}
+                        onPress={this.onPressBaseCurrency}
+                        defaultValue={TEMP_BASE_PRICE}
+                        keyboardType='numeric'
+                        onChangeText={this.onTextChange}
 
-                />
-                <InputWithButton
-                    buttonText={TEMP_QUOTE_CURRENCY}
-                    onPress={this.onPressQuoteCurrency}
-                    editable={false}
-                    defaultValue={TEMP_QUOTE_PRICE}
-                    keyboardType='numeric'
-                />
-                
+                    />
+                    <InputWithButton
+                        buttonText={TEMP_QUOTE_CURRENCY}
+                        onPress={this.onPressQuoteCurrency}
+                        editable={false}
+                        defaultValue={TEMP_QUOTE_PRICE}
+                        keyboardType='numeric'
+                    />
+                </KeyboardAvoidingView>
                 <LastConverted
                     base={TEMP_BASE_CURRENCY}
                     quote={TEMP_QUOTE_CURRENCY}
