@@ -5,6 +5,7 @@ import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
+import { Header } from '../components/Header';
 
 
 const TEMP_BASE_CURRENCY = 'BRL';
@@ -18,19 +19,23 @@ export default class Home extends Component{
 
     onPressBaseCurrency = () => {
         console.log('Base currency pressed');
-    }
+    };
 
     onPressQuoteCurrency = () => {
         console.log('Quote currency pressed');
-    }
+    };
 
     onTextChange = (text) => {
         console.log('change text', text);
-    }
+    };
 
     swapCurrencies = () => {
         console.log('Currencies swapped');
-    }
+    };
+
+    configPress = () => {
+        console.log('Config was pressed');
+    };
 
     render(){
         return (
@@ -39,6 +44,7 @@ export default class Home extends Component{
                     translucent={false}
                     barStyle="light-content"
                 />
+                <Header onPress={this.configPress} />
                 <Logo/>
                 <InputWithButton
                     buttonText={TEMP_BASE_CURRENCY}
