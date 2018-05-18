@@ -4,12 +4,15 @@ import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
+import { LastConverted } from '../components/Text';
 
 
 const TEMP_BASE_CURRENCY = 'BRL';
-const TEMP_QUOTE_CURRENCY = 'USD'
+const TEMP_QUOTE_CURRENCY = 'USD';
 const TEMP_BASE_PRICE = '100';
 const TEMP_QUOTE_PRICE = '27.124';
+const TEMP_CONVERSION_RATE = 0.27124;
+const TEMP_CONVERSION_DATE = new Date();
 
 export default class Home extends Component{
 
@@ -26,7 +29,7 @@ export default class Home extends Component{
     }
 
     swapCurrencies = () => {
-        console.log('Currencies swwapped');
+        console.log('Currencies swapped');
     }
 
     render(){
@@ -52,9 +55,17 @@ export default class Home extends Component{
                     defaultValue={TEMP_QUOTE_PRICE}
                     keyboardType='numeric'
                 />
+                
+                <LastConverted
+                    base={TEMP_BASE_CURRENCY}
+                    quote={TEMP_QUOTE_CURRENCY}
+                    conversionRate={TEMP_CONVERSION_RATE}
+                    date={TEMP_CONVERSION_DATE}
+                />
+
                 <ClearButton
                     text='Reverse Currencies'
-                    onPress={this.swapCurrencies()}
+                    onPress={this.swapCurrencies}
                 />
             </Container>
         )
