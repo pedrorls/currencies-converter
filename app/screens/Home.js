@@ -62,13 +62,14 @@ export default class Home extends Component{
                         defaultValue={TEMP_QUOTE_PRICE}
                         keyboardType='numeric'
                     />
+                
+                    <LastConverted
+                        base={TEMP_BASE_CURRENCY}
+                        quote={TEMP_QUOTE_CURRENCY}
+                        conversionRate={TEMP_CONVERSION_RATE}
+                        date={TEMP_CONVERSION_DATE}
+                    />
                 </KeyboardAvoidingView>
-                <LastConverted
-                    base={TEMP_BASE_CURRENCY}
-                    quote={TEMP_QUOTE_CURRENCY}
-                    conversionRate={TEMP_CONVERSION_RATE}
-                    date={TEMP_CONVERSION_DATE}
-                />
 
                 <ClearButton
                     text='Reverse Currencies'

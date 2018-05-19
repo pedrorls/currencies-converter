@@ -8,7 +8,7 @@ import styles from './styles';
 const LastConverted = ({ base, quote, date, conversionRate }) => {
     return(
         <Text style={ styles.smallText }>
-            1 { base } = { conversionRate } { quote } as of { moment(date).format('D, MMMM, YYYY ') }
+            1 { base } = { conversionRate } { quote } as of { moment(date).format('D MMMM YYYY ') }
         </Text>
     );
 }
