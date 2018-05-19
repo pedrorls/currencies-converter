@@ -11,8 +11,8 @@ export default EStylesheet.create({
             paddingTop: 20,
         },
         '@media android':{
-            paddingTop: StatusBar.currentHeight + 5
-        },
+            paddingTop: 15,
+        }
     },
     button:{
         alignSelf: 'flex-end',
