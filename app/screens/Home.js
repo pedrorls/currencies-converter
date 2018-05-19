@@ -20,12 +20,16 @@ export default class Home extends Component{
         navigation: PropTypes.object,
     }
 
+    navigateTo(screenName, data=null){
+        this.props.navigation.navigate(screenName, data);
+    }
+
     onPressBaseCurrency = () => {
-        this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
+        this.navigateTo('CurrencyList', { title: 'Base Currency' });
     };
 
     onPressQuoteCurrency = () => {
-        this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
+        this.navigateTo('CurrencyList', { title: 'Quote Currency' });
     };
 
     onTextChange = (text) => {
@@ -37,7 +41,7 @@ export default class Home extends Component{
     };
 
     configPress = () => {
-        console.log('Config was pressed');
+        this.navigateTo('Options');
     };
 
     render(){

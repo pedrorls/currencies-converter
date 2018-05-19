@@ -1,14 +1,42 @@
 import { StackNavigator } from 'react-navigation';
 import { StatusBar } from 'react-native';
-import { Home, CurrencyList } from '../screens';
+import {
+    Home,
+    CurrencyList,
+    Options,
+    Themes
+} from '../screens';
 
-export default StackNavigator({
+const HomeStack = StackNavigator({
     Home: {
         screen: Home,
         navigationOptions: {
             header: () => null
         }
 
+    },
+    Options: {
+        screen: Options,
+        navigationOptions: {
+            headerTitle: 'Options',
+        }
+    },
+    Themes: {
+        screen: Themes,
+        navigationOptions: {
+            headerTitle: 'Available Themes',
+        }
+    }
+},{
+    headerMode: 'screen',
+});
+
+export default StackNavigator({
+    Home: {
+        screen: HomeStack,
+        navigationOptions: {
+            header: () => null
+        }
     },
     CurrencyList: {
         screen: CurrencyList,

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, StatusBar, Platform } from 'react-native';
+import { ScrollView, StatusBar, Platform, Linking, Alert } from 'react-native';
 import { ListItem, Separator } from '../components/List';
 import { Ionicons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 
 
 const ICON_PREFIX = Platform.OS === 'ios' ? 'ios' : 'md';
@@ -9,12 +10,24 @@ const ICON_COLOR = '#868686';
 const ICON_SIZE = 23;
 
 export default class Options extends Component {
+
+    static propTypes = {
+        navigation: PropTypes.object,
+    };
+
+    navigateTo(screenName, data=null){
+        this.props.navigation.navigate(screenName, data);
+    }
+
     onThemesPress = () => {
-        console.log('Themes pressed');
+        this.navigateTo('Themes');
     };
 
     onSitePress = () => {
-        console.log('Site pressed')
+        Linking.openURL('httpsss://fixer.io')
+        .catch(
+            () => Alert.alert('Link Error', 'Please try later or contact the developer.')
+        );
     };
 
     render(){
