@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
+
+import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
 
 const TEMP_BASE_CURRENCY = 'BRL';
 const TEMP_QUOTE_CURRENCY = 'USD';
@@ -15,9 +18,10 @@ const TEMP_QUOTE_PRICE = '27.124';
 const TEMP_CONVERSION_RATE = 0.27124;
 const TEMP_CONVERSION_DATE = new Date();
 
-export default class Home extends Component{
+class Home extends Component{
     static propTypes = {
         navigation: PropTypes.object,
+        dispatch: PropTypes.func,
     }
 
     navigateTo(screenName, data=null){
@@ -32,12 +36,12 @@ export default class Home extends Component{
         this.navigateTo('CurrencyList', { title: 'Quote Currency' });
     };
 
-    onTextChange = (text) => {
-        console.log('change text', text);
+    onTextChange = (amount) => {
+        this.props.dispatch(changeCurrencyAmount(amount));
     };
 
     swapCurrencies = () => {
-        console.log('Currencies swapped');
+        this.props.dispatch(swapCurrency());
     };
 
     configPress = () => {
@@ -86,3 +90,5 @@ export default class Home extends Component{
         )
     }
 }
+
+export default connect()(Home);
