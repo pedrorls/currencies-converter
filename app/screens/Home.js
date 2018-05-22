@@ -11,17 +11,16 @@ import { Header } from '../components/Header';
 
 import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
 
-const TEMP_BASE_CURRENCY = 'BRL';
-const TEMP_QUOTE_CURRENCY = 'USD';
-const TEMP_BASE_PRICE = '100';
-const TEMP_QUOTE_PRICE = '27.124';
-const TEMP_CONVERSION_RATE = 0.27124;
-const TEMP_CONVERSION_DATE = new Date();
-
 class Home extends Component{
     static propTypes = {
         navigation: PropTypes.object,
         dispatch: PropTypes.func,
+        baseCurrency: PropTypes.string,
+        quoteCurrency: PropTypes.string,
+        amount: PropTypes.number,
+        conversionRate: PropTypes.number,
+        isFetching: PropTypes.bool,
+        lastConvertedDate: PropTypes.object,
     }
 
     navigateTo(screenName, data=null){
@@ -49,6 +48,10 @@ class Home extends Component{
     };
 
     render(){
+        let quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
+        if(this.props.isFetching){
+            quotePrice = '...';
+        }
         return (
             <Container>
                 <StatusBar
@@ -59,26 +62,26 @@ class Home extends Component{
                 <Logo/>
                 <KeyboardAvoidingView behavior='padding'>
                     <InputWithButton
-                        buttonText={TEMP_BASE_CURRENCY}
+                        buttonText={this.props.baseCurrency}
                         onPress={this.onPressBaseCurrency}
-                        defaultValue={TEMP_BASE_PRICE}
+                        defaultValue={this.props.amount.toString()}
                         keyboardType='numeric'
                         onChangeText={this.onTextChange}
 
                     />
                     <InputWithButton
-                        buttonText={TEMP_QUOTE_CURRENCY}
+                        buttonText={this.props.quoteCurrency}
                         onPress={this.onPressQuoteCurrency}
                         editable={false}
-                        defaultValue={TEMP_QUOTE_PRICE}
+                        defaultValue={quotePrice}
                         keyboardType='numeric'
                     />
                 
                     <LastConverted
-                        base={TEMP_BASE_CURRENCY}
-                        quote={TEMP_QUOTE_CURRENCY}
-                        conversionRate={TEMP_CONVERSION_RATE}
-                        date={TEMP_CONVERSION_DATE}
+                        base={this.props.baseCurrency}
+                        quote={this.props.quoteCurrency}
+                        conversionRate={this.props.conversionRate}
+                        date={this.props.lastConvertedDate}
                     />
                 </KeyboardAvoidingView>
 
@@ -91,4 +94,19 @@ class Home extends Component{
     }
 }
 
-export default connect()(Home);
+const matStateToProps  = (state) => {
+    const baseCurrency = state.currencies.baseCurrency;
+    const quoteCurrency = state.currencies.quoteCurrency;
+    const conversionSelector = state.currencies.conversions[baseCurrency] || {};
+    const rates = conversionSelector.rates|| {};
+    return {
+        baseCurrency,
+        quoteCurrency,
+        amount: state.currencies.amount,
+        conversionRate: rates[quoteCurrency] || 0,
+        isFetching: conversionSelector.isFetching,
+        lastConvertedDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
+    }
+}
+
+export default connect(matStateToProps)(Home);
