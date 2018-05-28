@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, StatusBar } from 'react-native';
+import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
 import { ListItem, Separator } from '../components/List';
+import { changePrimaryColor } from '../actions/theme';
 
 const styles = EStyleSheet.create({
     $blue: '$primaryBlue',
@@ -11,14 +13,16 @@ const styles = EStyleSheet.create({
     $purple: '$primaryPurple',
 });
 
-export default class Themes extends Component{
+class Themes extends Component{
 
     static propTypes = {
         navigation: PropTypes.object,
+        dispatch: PropTypes.func,
     };
 
 
     onThemePress = (color) => {
+        this.props.dispatch(changePrimaryColor(color));
         this.props.navigation.goBack();
     };
 
@@ -62,3 +66,5 @@ export default class Themes extends Component{
         );
     }
 }
+
+export default connect()(Themes)
