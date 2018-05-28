@@ -9,7 +9,11 @@ import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
 
-import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
+import { 
+    swapCurrency,
+    changeCurrencyAmount,
+    getInitialConversion
+} from '../actions/currencies';
 
 class Home extends Component{
     static propTypes = {
@@ -22,6 +26,10 @@ class Home extends Component{
         isFetching: PropTypes.bool,
         lastConvertedDate: PropTypes.object,
         primaryColor: PropTypes.string,
+    }
+
+    componentWillMount(){
+        this.props.dispatch(getInitialConversion())
     }
 
     navigateTo(screenName, data=null){
