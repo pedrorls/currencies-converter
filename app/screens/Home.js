@@ -28,11 +28,17 @@ class Home extends Component{
     }
 
     onPressBaseCurrency = () => {
-        this.navigateTo('CurrencyList', { title: 'Base Currency' });
+        this.navigateTo('CurrencyList', { 
+            title: 'Base Currency',
+            type: 'base', 
+        });
     };
 
     onPressQuoteCurrency = () => {
-        this.navigateTo('CurrencyList', { title: 'Quote Currency' });
+        this.navigateTo('CurrencyList', { 
+            title: 'Quote Currency',
+            type: 'quote'
+        });
     };
 
     onTextChange = (amount) => {
