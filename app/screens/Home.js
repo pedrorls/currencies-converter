@@ -21,6 +21,7 @@ class Home extends Component{
         conversionRate: PropTypes.number,
         isFetching: PropTypes.bool,
         lastConvertedDate: PropTypes.object,
+        primaryColor: PropTypes.string,
     }
 
     navigateTo(screenName, data=null){
@@ -59,7 +60,7 @@ class Home extends Component{
             quotePrice = '...';
         }
         return (
-            <Container>
+            <Container backgroundColor={ this.props.primaryColor }>
                 <StatusBar
                     translucent={false}
                     barStyle="light-content"
@@ -73,6 +74,7 @@ class Home extends Component{
                         defaultValue={this.props.amount.toString()}
                         keyboardType='numeric'
                         onChangeText={this.onTextChange}
+                        textColor={this.props.primaryColor}
 
                     />
                     <InputWithButton
@@ -81,6 +83,7 @@ class Home extends Component{
                         editable={false}
                         defaultValue={quotePrice}
                         keyboardType='numeric'
+                        textColor={this.props.primaryColor}
                     />
                 
                     <LastConverted
@@ -112,6 +115,7 @@ const matStateToProps  = (state) => {
         conversionRate: rates[quoteCurrency] || 0,
         isFetching: conversionSelector.isFetching,
         lastConvertedDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
+        primaryColor: state.theme.primaryColor,
     }
 }
 
