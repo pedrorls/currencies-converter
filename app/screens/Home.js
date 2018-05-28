@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { connectAlert } from '../components/Alert';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
@@ -26,10 +27,18 @@ class Home extends Component{
         isFetching: PropTypes.bool,
         lastConvertedDate: PropTypes.object,
         primaryColor: PropTypes.string,
+        alertWithType: PropTypes.func,
+        currencyError: PropTypes.string,
     }
 
     componentWillMount(){
         this.props.dispatch(getInitialConversion())
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.currencyError && nextProps.currencyError !== this.props.currencyError){
+            this.props.alertWithType('error', 'Error', nextProps.currencyError);
+        }
     }
 
     navigateTo(screenName, data=null){
@@ -124,7 +133,8 @@ const matStateToProps  = (state) => {
         isFetching: conversionSelector.isFetching,
         lastConvertedDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
         primaryColor: state.theme.primaryColor,
+        currencyError: state.currencies.error,
     }
 }
 
-export default connect(matStateToProps)(Home);
+export default connect(matStateToProps)(connectAlert(Home));
