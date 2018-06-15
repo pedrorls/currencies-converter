@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import currencies from '../data/currencies';
 import { ListItem, Separator } from '../components/List';
 import { changeBaseCurrency, changeQuoteCurrency } from '../actions/currencies';
-TEMP_CURRENCY = 'BRL'
+
 
 class CurrencyList extends Component {
     static propTypes = {

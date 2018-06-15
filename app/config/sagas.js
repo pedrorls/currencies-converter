@@ -9,7 +9,7 @@ import {
 import apikey from './keys';
 
 const getLatestRate = currency => (
-    fetch(`http://api.fixer.io/latest?access_key=${apikey}&base=${currency}`)
+    fetch(`http://data.fixer.io/api/latest?access_key=${apikey}`)
 );
 
 function* fetchLatestConversionRates(action){
